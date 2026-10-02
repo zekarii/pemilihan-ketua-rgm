@@ -55,7 +55,7 @@ function pilih(id) {
   }).then(function (res) {
     if (!res.ok || !res.j.ok) throw new Error(res.j.error || ('Server tidak menjawab dengan benar (kode ' + res.status + ')'));
     location.hash = '#terimakasih';
-    setTimeout(kembaliKeAwal, 900);
+    setTimeout(kembaliKeAwal, 4500);
   }).catch(function (e) {
     sibuk = false;
     document.querySelectorAll('.kandidat').forEach(function (b) { b.disabled = false; });
