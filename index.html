@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pemilihan Ketua RGM</title>
+<link rel="icon" type="image/ico" href="img/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="kertas">
+
+  <section id="nama">
+    <h1>Masukkan data diri</h1>
+    <div class="label">Nama lengkap</div>
+    <input id="inNama" type="text" placeholder="contoh: Yardan Farras Gunawan" autocomplete="off" maxlength="60" aria-label="Nama">
+    <div class="label">Kelas</div>
+    <input id="inKelas" type="text" placeholder="masukkan kelas, cth: 10-B" autocomplete="off" maxlength="20" aria-label="Kelas">
+    <p class="err" id="errNama" role="alert"></p>
+    <button class="next" id="btnNext" aria-label="Lanjut">&#10140;</button>
+  </section>
+
+  <section id="pilih">
+    <h1>Pilih Calon Ketua RGM</h1>
+    <div class="galeri" id="galeri"></div>
+    <p class="err" id="errPilih" role="alert"></p>
+  </section>
+
+  <section id="terimakasih">
+    <p class="terima">Terima Kasih</p>
+    <p class="sub">silahkan meninggalkan ruangan setelah memilih</p>
+  </section>
+
+</main>
+
+<script src="js/app.js"></script>
+</body>
+</html>

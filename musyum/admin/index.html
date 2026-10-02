@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Pemilihan Ketua RGM - Hasil Pemilihan</title>
+<link rel="icon" type="image/ico" href="../favicon.ico">
+<link rel="stylesheet" href="assets-admin/admin.css">
+</head>
+<body>
+<main class="kertas">
+  <h1>Hasil Pemilihan Ketua RGM</h1>
+
+  <div id="login">
+    <input id="pw" type="password" placeholder="Password admin" aria-label="Password admin">
+    <button id="btnMasuk">Masuk</button>
+    <p class="err" id="err"></p>
+  </div>
+
+  <div id="isi" hidden>
+    <p>Total suara masuk: <strong id="total">0</strong></p>
+    <div id="hasil"></div>
+    <div class="alat">
+      <button id="btnRefresh">Perbarui</button>
+      <button id="btnReset" class="bahaya">Hapus semua suara</button>
+    </div>
+    <h2>Daftar pemilih (terbaru di atas)</h2>
+    <table>
+      <thead><tr><th>Waktu</th><th>Nama</th><th>Kelas</th><th>Pilihan</th></tr></thead>
+      <tbody id="log"></tbody>
+    </table>
+  </div>
+</main>
+
+<script src="assets-admin/admin.js"></script>
+</body>
+</html>
