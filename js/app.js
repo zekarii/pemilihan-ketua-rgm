@@ -59,7 +59,7 @@ function pilih(id) {
   }).catch(function (e) {
     sibuk = false;
     document.querySelectorAll('.kandidat').forEach(function (b) { b.disabled = false; });
-    document.getElementById('errPilih').textContent = e.message + '. Panggil panitia bila perlu.';
+    document.getElementById('errPilih').textContent = e.message + '. Hubungi panitia bila perlu.';
   });
 }
 
