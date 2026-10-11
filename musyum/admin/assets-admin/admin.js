@@ -11,7 +11,21 @@ var KELAS = {
 
 // Opsional: isi jumlah siswa per kelas. Kalau suara melebihi angka ini,
 // kartu kelas ditandai merah (tanda suara ganda). Contoh: { 'XA': 32, 'XI IPA 1': 30 }
-var UKURAN_KELAS = {};
+var UKURAN_KELAS = {
+   'XA': 35,
+   'XB': 35,
+   'XC': 33,
+   'XD': 35,
+   'XI IPA 1': 35,
+   'XI IPA 2': 35,
+   'XI IPS 1': 27,
+   'XI IPS 2': 26,
+   'XI IAI 1': 15,
+   'XII IPA 1': 35,
+   'XII IPA 2': 34,
+   'XII IPS 1': 35,
+   'XII IAI 1': 33
+};
 
 var REFRESH_MS = 10000;
 var password = '';
