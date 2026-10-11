@@ -290,3 +290,65 @@ tr:last-child td { border-bottom: none; }
   * { animation: none !important; transition: none !important; }
   .baris { opacity: 1; }
 }
+
+
+/* untuk suara per kelas */
+.hint { 
+  color: var(--muted); 
+  font-size: .92rem; 
+  margin: -6px 0 18px; 
+}
+ 
+.kelas-grup { margin-bottom: 22px; }
+ 
+.kelas-judul {
+  margin: 0 0 10px;
+  font-size: .8rem;
+  font-weight: 800;
+  color: var(--kuning);
+  text-transform: uppercase;
+  letter-spacing: .8px;
+}
+ 
+.kelas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+ 
+.kelas-kartu {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 16px;
+  background: var(--card-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--biru);
+  border-radius: 12px;
+}
+ 
+.kelas-nama { font-weight: 700; }
+ 
+.kelas-angka {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text);
+}
+ 
+.kelas-kartu.nol { 
+  border-left-color: var(--border); 
+}
+.kelas-kartu.nol .kelas-nama, .kelas-kartu.nol .kelas-angka { 
+  color: var(--muted); 
+}
+ 
+.kelas-kartu.lebih {
+  border-color: rgba(255, 123, 114, 0.55);
+  border-left-color: var(--err);
+  background: rgba(255, 123, 114, 0.08);
+}
+.kelas-kartu.lebih .kelas-angka { 
+  color: var(--err); 
+}
