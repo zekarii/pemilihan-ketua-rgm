@@ -1,169 +1,66 @@
-:root { 
-  --bg:#12263f; 
-  --kertas:#fbfaf7; 
-  --tinta:#12263f; 
-  --garis:#c9cfd8; 
-  --aksen:#f2b705; 
-  --err:#b3261e; 
+:root {
+  --bg: #0a0e27;
+  --kertas: #fbfaf7;
+  --tinta: #0a0e27;
+  --garis: #c9cfd8;
+  --aksen: #f2b705;
+  --err: #b3261e;
+  --grad1: #667eea;
+  --grad2: #1093c7;
+  --grad3: #f3f735;
 }
 
-* { 
-  box-sizing: border-box; 
-}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
 
-html, body { 
-  height: 100%; 
-  margin: 0; 
-}
-
-body { 
-  background: var(--bg); 
-  color: var(--tinta); 
+body {
+  background: var(--bg);
+  color: var(--tinta);
   font-family: 'Bricolage Grotesque', system-ui, sans-serif;
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  padding: 16px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow: hidden;
+  position: relative;
+  min-height: 100vh;
 }
 
-.kertas { 
-  background: var(--kertas); 
-  width: 100%; 
-  max-width: 920px; 
-  border-radius: 6px; 
-  padding: 40px 32px;
-  border-top: 10px solid var(--aksen); 
-  text-align: center; 
+/* Animated gradient background */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, var(--grad1), var(--grad2), var(--grad3), var(--grad1));
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  filter: blur(80px);
+  opacity: 0.4;
+  z-index: -1;
+  pointer-events: none;
 }
 
-section { 
-  display: none; 
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 80%, rgba(240, 147, 251, 0.1) 0%, transparent 50%);
+  animation: gradientShift 20s ease infinite reverse;
+  z-index: -1;
+  pointer-events: none;
 }
 
-section.aktif { 
-  display: block; 
-}
-
-h1 { 
-  font-size: clamp(1.8rem, 5vw, 2.8rem); 
-  font-weight: 800; margin: 0 0 24px; 
-  letter-spacing: -0.02em; 
-}
-
-input { 
-  display: block; 
-  width: 100%; 
-  max-width: 420px; 
-  margin: 0 auto 14px; 
-  padding: 14px 16px; 
-  font: inherit; 
-  font-size: 1.15rem;
-  border: 2px solid var(--garis); 
-  border-radius: 4px; 
-  background: #fff; 
-  color: var(--tinta); 
-}
-
-input:focus-visible, button:focus-visible, .kandidat:focus-visible { 
-  outline: 3px solid var(--aksen); 
-  outline-offset: 2px; 
-}
-
-.label { 
-  max-width: 420px; 
-  margin: 0 auto 6px; 
-  text-align: left; 
-  font-weight: 600; 
-}
-
-.next { 
-  margin-top: 10px; 
-  width: 64px; 
-  height: 64px; 
-  border-radius: 50%; 
-  border: 0; 
-  background: var(--tinta); 
-  color: #fff;
-  font-size: 1.8rem; 
-  cursor: pointer; 
-}
-
-.next:disabled { 
-  opacity: .5; 
-}
-
-.galeri { 
-  display: flex; 
-  flex-wrap: wrap; 
-  gap: 20px; 
-  justify-content: center; 
-}
-
-.kandidat { 
-  width: 240px; 
-  background: #fff; 
-  border: 2px solid var(--garis); 
-  border-radius: 4px; 
-  padding: 10px; 
-  cursor: pointer;
-  font: inherit; 
-  color: inherit; 
-  transition: border-color .15s, transform .15s;
-}
-
-.kandidat:hover { 
-  border-color: var(--tinta); 
-  transform: translateY(-3px); 
-}
-
-.kandidat:disabled { 
-  opacity: .6; 
-  cursor: wait; 
-  transform: none; 
-}
-
-.kandidat img { 
-  width: 100%; 
-  aspect-ratio: 3/4; 
-  object-fit: cover; 
-  display: block; 
-  background: #e4e7ec; 
-  border-radius: 2px; 
-}
-
-.kandidat span { 
-  display: block; 
-  margin-top: 10px; 
-  font-weight: 800; 
-  font-size: 1.1rem;
-}
-
-.err { 
-  color: var(--err); 
-  min-height: 1.4em; 
-  margin: 6px 0 0; 
-  font-weight: 600; 
-}
-
-.terima { 
-  font-size: clamp(2.4rem, 8vw, 4.5rem); 
-  font-weight: 800; 
-  margin: 0 0 12px; 
-}
-
-.sub { 
-  font-size: 1.3rem; 
-  margin: 0; 
-}
-
-@media (prefers-reduced-motion: reduce) { 
-  .kandidat { 
-    transition: none; 
-  } 
-}
-
-.float-up {
-  animation: floatUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 @keyframes floatUp {
@@ -171,9 +68,172 @@ input:focus-visible, button:focus-visible, .kandidat:focus-visible {
     opacity: 0;
     transform: translateY(40px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.kertas {
+  background: var(--kertas);
+  width: 100%;
+  max-width: 920px;
+  border-radius: 16px;
+  padding: 40px 32px;
+  border-top: 10px solid var(--aksen);
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
+  animation: floatUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+section { display: none; }
+section.aktif {
+  display: block;
+  animation: floatUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+h1 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 800;
+  margin: 0 0 24px;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--grad1), var(--grad2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+input {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 14px;
+  padding: 14px 16px;
+  font: inherit;
+  font-size: 1.15rem;
+  border: 2px solid var(--garis);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--tinta);
+  transition: all 0.2s;
+}
+
+input:focus-visible {
+  outline: none;
+  border-color: var(--aksen);
+  box-shadow: 0 0 0 3px rgba(242, 183, 5, 0.1);
+}
+
+.label {
+  max-width: 420px;
+  margin: 0 auto 6px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.next {
+  margin-top: 10px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 0;
+  background: linear-gradient(135deg, var(--grad1), var(--grad2));
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.next:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+}
+
+.next:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.galeri {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.kandidat {
+  width: 240px;
+  background: #fff;
+  border: 2px solid var(--garis);
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.kandidat:hover {
+  border-color: var(--grad1);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.25);
+}
+
+.kandidat:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+}
+
+.kandidat img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  display: block;
+  background: #e4e7ec;
+  border-radius: 8px;
+}
+
+.kandidat span {
+  display: block;
+  margin-top: 10px;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.err {
+  color: var(--err);
+  min-height: 1.4em;
+  margin: 6px 0 0;
+  font-weight: 600;
+}
+
+.terima {
+  font-size: clamp(2.4rem, 8vw, 4.5rem);
+  font-weight: 800;
+  margin: 0 0 12px;
+  background: linear-gradient(135deg, #4ade80, var(--aksen));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sub {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kandidat,
+  body::before,
+  body::after {
+    animation: none;
+    transition: none;
   }
 }

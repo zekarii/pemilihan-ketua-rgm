@@ -15,20 +15,20 @@ module.exports = async (req, res) => {
 
   try {
     const key = (nama + '|' + kelas).toLowerCase();
-    const added = await redis(['SADD', 'osis:voters', key]);
+    const added = await redis(['SADD', 'rgm:voters', key]);
     
     if (added === 0) {
       return res.status(409).json({ error: 'Nama dan kelas ini sudah memilih' });
     }
     
     try {
-      await redis(['HINCRBY', 'osis:counts', cand.id, 1]);
-      await redis(['RPUSH', 'osis:log', JSON.stringify({ 
+      await redis(['HINCRBY', 'rgm:counts', cand.id, 1]);
+      await redis(['RPUSH', 'rgm:log', JSON.stringify({ 
         nama, kelas, kandidat: cand.id, waktu: new Date().toISOString() 
       })]);
       return res.status(200).json({ ok: true });
     } catch (e) {
-      await redis(['SREM', 'osis:voters', key]).catch(() => {});
+      await redis(['SREM', 'rgm:voters', key]).catch(() => {});
       throw e;
     }
   } catch (e) {
