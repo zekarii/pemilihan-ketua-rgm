@@ -13,7 +13,8 @@
 }
 
 * { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; }
+html { height: 100%; }
+body { margin: 0; }
 
 body {
   background: var(--bg);
@@ -23,9 +24,11 @@ body {
   align-items: center;
   justify-content: center;
   padding: 16px;
-  overflow: hidden;
+  overflow-x: hidden;
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-tap-highlight-color: transparent;
   line-height: 1.6;
 }
 
@@ -111,7 +114,7 @@ input {
   margin: 0 auto 14px;
   padding: 14px 18px;
   font: inherit;
-  font-size: 1rem;
+  font-size: max(16px, 1rem);
   border: 2px solid var(--border);
   border-radius: 12px;
   background: var(--bg);
@@ -126,6 +129,35 @@ input:focus-visible {
   border-color: var(--biru);
   box-shadow: 0 0 0 4px rgba(76, 141, 255, 0.18);
 }
+
+select {
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto 18px;
+  min-height: 56px;
+  padding: 14px 48px 14px 18px;
+  font: inherit;
+  font-size: max(16px, 1rem);
+  touch-action: manipulation;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23ffc83d' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 16px center;
+  color: var(--text);
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: border-color .25s, box-shadow .25s, opacity .25s;
+}
+
+select:focus-visible {
+  outline: none;
+  border-color: var(--biru);
+  box-shadow: 0 0 0 4px rgba(76, 141, 255, 0.18);
+}
+
+select:disabled { opacity: .45; cursor: not-allowed; }
+select option { background: var(--card); color: var(--text); }
 
 .label {
   max-width: 380px;
@@ -347,4 +379,127 @@ input:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+}
+
+/* Layar sentuh dan layar kecil (HP / tablet) */
+.kandidat, .next, .modal-buttons button { touch-action: manipulation; }
+
+@media (pointer: coarse) {
+  select { min-height: 60px; font-size: 1.1rem; }
+  .label { font-size: 1.05rem; margin-bottom: 10px; }
+  .next { width: 72px; height: 72px; margin-top: 28px; }
+  .modal-buttons button { min-height: 56px; font-size: 1.05rem; }
+  .kandidat:hover { transform: none; }
+  .kandidat:active { border-color: var(--kuning); transform: scale(0.98); }
+}
+
+@media (max-width: 640px) {
+  body { padding: 12px; align-items: flex-start; }
+  .kertas { margin: auto 0; padding: 32px 18px; border-radius: 20px; }
+  select { max-width: none; }
+  .label { max-width: none; }
+  .galeri { gap: 14px; margin: 24px 0 8px; }
+  .kandidat { width: calc(50% - 7px); padding: 10px; }
+  .kandidat span { font-size: .95rem; }
+  .modal-content { padding: 28px 20px; }
+  .modal-buttons { flex-direction: column-reverse; }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) and (pointer: coarse) {
+  .kertas { max-width: 720px; }
+  select { max-width: 460px; }
+  .kandidat { width: 240px; }
+}
+
+/* Dropdown ala Google Forms */
+.label { color: var(--text); font-weight: 700; }
+.req { color: var(--err); margin-left: 4px; }
+
+.dd { position: relative; max-width: 380px; margin: 0 auto 22px; text-align: left; }
+
+.dd-btn {
+  width: 100%;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px 12px 18px;
+  background: var(--bg);
+  color: var(--muted);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  font-size: max(16px, 1rem);
+  text-align: left;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: border-color .2s, box-shadow .2s, opacity .2s;
+}
+
+.dd.terisi .dd-btn { color: var(--text); }
+.dd-btn:hover:not(:disabled) { border-color: rgba(120, 150, 220, 0.45); }
+.dd-btn:focus-visible, .dd.buka .dd-btn {
+  outline: none;
+  border-color: var(--biru);
+  box-shadow: 0 0 0 4px rgba(76, 141, 255, 0.18);
+}
+.dd-btn:disabled { opacity: .45; cursor: not-allowed; }
+.dd-btn svg { flex: none; color: var(--kuning); transition: transform .2s; }
+.dd.buka .dd-btn svg { transform: rotate(180deg); }
+
+.dd-list {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 20;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  max-height: 280px;
+  overflow-y: auto;
+  background: var(--card-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+}
+
+.dd.buka .dd-list { display: block; animation: ddIn .16s ease-out; }
+@keyframes ddIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+.dd-list li {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  color: var(--text);
+  font-size: max(16px, 1rem);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.dd-list li.aktif { background: rgba(76, 141, 255, 0.16); }
+.dd-list li.dipilih { font-weight: 700; box-shadow: inset 3px 0 0 var(--kuning); }
+
+@media (pointer: coarse) { .dd-btn { min-height: 60px; } .dd-list li { min-height: 56px; } }
+@media (max-width: 640px) { .dd { max-width: none; } }
+
+/* Logo sekolah dan rgm di pojok kanan bawah */
+.bottom-right-logo {
+  position: absolute;
+  right: 1px;
+  bottom: 1px;
+  width: 180px;
+  height: 190px;
+  z-index: 2;
+  opacity: .92;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 640px) {
+  body { padding-bottom: 84px; }
+  .bottom-right-logo { right: 12px; bottom: 12px; width: 78px; }
 }

@@ -102,4 +102,4 @@ document.getElementById('btnReset').addEventListener('click', function () {
   if (confirm('Hapus SEMUA suara? Tindakan ini tidak bisa dibatalkan.')) {
     muat('reset').catch(function (e) { alert(e.message); });
   }
-});
+});             

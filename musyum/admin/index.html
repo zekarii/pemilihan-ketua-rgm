@@ -3,21 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Halaman Panitia | Hasil Pungutan Suara</title>
+<meta name="robots" content="noindex">
+<title>Halaman Panitia - Hasil Pungutan Suara Ketua RGM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/musyum/admin/assets-admin/admin.css">
-<link rel="icon" type="image/ico" href="assets-admin/admin-favicon.ico">
+<link rel="icon" type="image/ico" href="/musyum/admin/assets-admin/admin-favicon.ico">
 </head>
 <body>
 <div class="bg-decoration"></div>
 <main class="kertas">
-  <h1>Hasil Pemilihan Ketua RGM | Panitia Musyum '26-27</h1>
-  <p class="admin-subtitle">Dashboard Panitia Musyum 26-27</p>
+  <h1>Hasil Pemilihan Ketua RGM</h1>
+  <p class="admin-subtitle">Dashboard Penghitung Suara</p>
 
   <div id="login">
-    <input id="pw" type="password" placeholder="Masukkan password" aria-label="Gunakan password yang diberikan oleh koordinator PDD">
+    <input id="pw" type="password" placeholder="Masukkan password" aria-label="Password admin">
     <button id="btnMasuk">Masuk</button>
     <p class="err" id="err"></p>
   </div>
@@ -31,14 +32,14 @@
     <div id="hasil"></div>
 
     <div class="alat">
-      <button id="btnRefresh">🔄 Perbarui</button>
-      <button id="btnReset" class="bahaya">⚠ Hapus Semua Suara</button>
+      <button id="btnRefresh">Refresh</button>
+      <button id="btnReset" class="bahaya">⚠ Hapus Semua</button>
     </div>
 
-    <h2>Riwayat Pungutan Suara</h2>
+    <h2>Riwayat Pemilih</h2>
     <div class="table-wrapper">
       <table>
-        <thead><tr><th>Waktu</th><th>Nama</th><th>Kelas</th><th>Calon Yang Dipilih</th></tr></thead>
+        <thead><tr><th>Waktu</th><th>Kelas</th><th>Calon Ketua Yang Dipilih</th></tr></thead>
         <tbody id="log"></tbody>
       </table>
     </div>
