@@ -1,6 +1,7 @@
 var pemilih = { nama: '', kelas: '' };
 var sibuk = false;
 var halaman = ['nama', 'pilih', 'terimakasih'];
+var kandidatTerpilih = null;
 
 function tampil() {
   var h = (location.hash || '#nama').slice(1);
@@ -39,8 +40,21 @@ function kembaliKeAwal() {
   location.hash = '#nama';
 }
 
-function pilih(id) {
-  if (sibuk) return;
+function bukaModal(namaKandidat, id) {
+  kandidatTerpilih = id;
+  document.getElementById('namaKandidat').textContent = namaKandidat;
+  document.getElementById('modalKonfirmasi').classList.add('aktif');
+}
+
+function tutupModal() {
+  document.getElementById('modalKonfirmasi').classList.remove('aktif');
+  kandidatTerpilih = null;
+  sibuk = false;
+  document.querySelectorAll('.kandidat').forEach(function (b) { b.disabled = false; });
+}
+
+function kirimSuara() {
+  if (!kandidatTerpilih || sibuk) return;
   sibuk = true;
   document.querySelectorAll('.kandidat').forEach(function (b) { b.disabled = true; });
   document.getElementById('errPilih').textContent = '';
@@ -48,7 +62,7 @@ function pilih(id) {
   fetch('/api/vote', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ nama: pemilih.nama, kelas: pemilih.kelas, kandidat: id })
+    body: JSON.stringify({ nama: pemilih.nama, kelas: pemilih.kelas, kandidat: kandidatTerpilih })
   }).then(function (r) {
     return r.text().then(function (t) {
       var j = {};
@@ -56,15 +70,23 @@ function pilih(id) {
       return { ok: r.ok, status: r.status, j: j };
     });
   }).then(function (res) {
+    tutupModal();
     if (!res.ok || !res.j.ok) throw new Error(res.j.error || ('Server tidak menjawab dengan benar (kode ' + res.status + ')'));
     location.hash = '#terimakasih';
     setTimeout(kembaliKeAwal, 1500);
   }).catch(function (e) {
-    sibuk = false;
-    document.querySelectorAll('.kandidat').forEach(function (b) { b.disabled = false; });
+    tutupModal();
     document.getElementById('errPilih').textContent = e.message + '. Panggil panitia bila perlu.';
   });
 }
+
+document.getElementById('btnTidak').addEventListener('click', tutupModal);
+document.getElementById('btnYa').addEventListener('click', kirimSuara);
+
+// Tutup modal saat klik luar
+document.getElementById('modalKonfirmasi').addEventListener('click', function (e) {
+  if (e.target === this) tutupModal();
+});
 
 fetch('candidates.json')
   .then(function (r) { return r.json(); })
@@ -85,7 +107,7 @@ fetch('candidates.json')
       
       b.appendChild(img);
       b.appendChild(s);
-      b.addEventListener('click', function () { pilih(c.id); });
+      b.addEventListener('click', function () { bukaModal(c.nama, c.id); });
       g.appendChild(b);
     });
   })

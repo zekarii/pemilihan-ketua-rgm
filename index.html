@@ -4,37 +4,55 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pemilihan Ketua RGM</title>
-<link rel="icon" type="image/ico" href="img/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/ico" href="img/favicon.ico">
 </head>
 <body>
-<main class="kertas float-up">
+<div class="bg-decoration"></div>
+<main class="kertas">
 
   <section id="nama">
-    <h1>Masukkan data diri</h1>
+    <h1>Pemilihan Ketua RGM <span>Masa Jihad 2026-2027</span></h1>
+    <p class="subtitle">Silakan masukkan data diri Anda</p>
     <div class="label">Nama lengkap</div>
-    <input id="inNama" type="text" placeholder="Masukkan nama lengkap." autocomplete="off" maxlength="60" aria-label="Nama">
+    <input id="inNama" type="text" placeholder="Nama lengkap" autocomplete="off" maxlength="60" aria-label="Nama">
     <div class="label">Kelas</div>
-    <input id="inKelas" type="text" placeholder="masukkan kelas, cth: 10-B" autocomplete="off" maxlength="20" aria-label="Kelas">
+    <input id="inKelas" type="text" placeholder="XI IPA 2" autocomplete="off" maxlength="20" aria-label="Kelas">
     <p class="err" id="errNama" role="alert"></p>
-    <button class="next" id="btnNext" aria-label="Lanjut">&#10140;</button>
+    <button class="next" id="btnNext" aria-label="Lanjut"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
   </section>
 
   <section id="pilih">
     <h1>Pilih Calon Ketua RGM</h1>
+    <p class="subtitle">Pilih calon yang Anda dukung</p>
     <div class="galeri" id="galeri"></div>
     <p class="err" id="errPilih" role="alert"></p>
   </section>
 
   <section id="terimakasih">
+    <div class="success-icon">✓</div>
     <p class="terima">Terima Kasih</p>
-    <p class="sub">silahkan meninggalkan ruangan setelah memilih</p>
+    <p class="sub">Suara Anda telah tercatat masuk ke server.</p>
   </section>
 
 </main>
+
+<div id="modalKonfirmasi" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Apakah anda sudah yakin untuk memilih</h2>
+      <p class="nama-calon" id="namaKandidat"></p>
+      <p class="confirm-text">sebagai Ketua RGM?</p>
+    </div>
+    <div class="modal-buttons">
+      <button id="btnTidak" class="btn-tidak">Kembali</button>
+      <button id="btnYa" class="btn-ya">Ya, saya yakin</button>
+    </div>
+  </div>
+</div>
 
 <script src="js/app.js"></script>
 </body>
