@@ -67,7 +67,7 @@ function gambar(d) {
   tb.innerHTML = '';
   d.log.forEach(function (l) {
     var tr = document.createElement('tr');
-    [new Date(l.waktu).toLocaleString('id-ID'), l.nama, l.kelas, nama[l.kandidat] || l.kandidat].forEach(function (v) {
+    [new Date(l.waktu).toLocaleString('id-ID'), l.kelas, nama[l.kandidat] || l.kandidat].forEach(function (v) {
       var td = document.createElement('td');
       td.textContent = v;
       tr.appendChild(td);
