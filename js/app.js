@@ -1,8 +1,7 @@
 var KELAS = {
   'X':   ['XA', 'XB', 'XC', 'XD'],
   'XI':  ['XI IPA 1', 'XI IPA 2', 'XI IPS 1', 'XI IPS 2', 'XI IAI 1'],
-  'XII': ['XII IPA 1', 'XII IPA 2', 'XII IPS 1', 'XII IAI 1'],
-  'GURU': 'GURU'
+  'XII': ['XII IPA 1', 'XII IPA 2', 'XII IPS 1', 'XII IAI 1']
 };
 
 var pemilih = { kelas: '' };
