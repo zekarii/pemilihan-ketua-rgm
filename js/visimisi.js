@@ -2,7 +2,9 @@
   const btn   = document.getElementById('btnVisiMisi');
   const modal = document.getElementById('modalVisiMisi');
   const grid  = document.getElementById('vmGrid');
+  const FADE_MS = 250; // samakan dengan durasi di CSS
   let data = null;
+  let closing = false;
 
   const esc = s => String(s ?? '').replace(/[&<>"']/g, ch =>
     ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -30,20 +32,33 @@
     }).join('');
   }
 
+  function open() {
+    closing = false;
+    modal.classList.remove('menutup');
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    if (modal.hidden || closing) return;
+    closing = true;
+    modal.classList.add('menutup');
+    setTimeout(() => {
+      modal.hidden = true;
+      modal.classList.remove('menutup');
+      document.body.style.overflow = '';
+      closing = false;
+    }, FADE_MS);
+  }
+
   btn.addEventListener('click', async () => {
     try {
       render(await load());
     } catch (e) {
       grid.innerHTML = '<p>Visi & misi belum dapat dimuat.</p>';
     }
-    modal.hidden = false;
-    document.body.style.overflow = 'hidden';
+    open();
   });
-
-  function close() {
-    modal.hidden = true;
-    document.body.style.overflow = '';
-  }
 
   modal.addEventListener('click', e => {
     if (e.target === modal || e.target.closest('.vm-close')) close();
