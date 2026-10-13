@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Asatidz Votes - Pemilihan Ketua RGM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="icon" type="image/ico" href="/img/favicon.ico">
+</head>
+<body>
+<div class="bg-decoration"></div>
+<img class="bg-swirl" src="/img/rgm-sekolah.png" alt="" aria-hidden="true">
+
+<main class="kertas">
+
+  <section id="kode" class="aktif">
+    <h1>Suara Guru <span>Pemilihan Ketua RGM</span></h1>
+    <p class="subtitle">Masukkan kode pemilih dari panitia</p>
+    <div class="label" id="lbKode">Kode Guru<span class="req">*</span></div>
+    <input id="inputKode" type="text" autocomplete="off" autocapitalize="characters"
+           spellcheck="false" placeholder="Contoh: ASATIDZ-AB12" aria-labelledby="lbKode"
+           style="text-transform:uppercase;letter-spacing:2px;text-align:center">
+    <p class="err" id="errKode" role="alert"></p>
+    <button class="next" id="btnKode" aria-label="Lanjut"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </section>
+
+  <section id="pilih">
+    <h1>Pilih Calon Ketua RGM</h1>
+    <p class="subtitle">Pilih calon yang Anda dukung</p>
+    <div class="galeri" id="galeri"></div>
+    <button type="button" class="btn-visimisi" id="btnVisiMisi">Lihat Visi &amp; Misi</button>
+    <p class="err" id="errPilih" role="alert"></p>
+  </section>
+
+  <section id="terimakasih">
+    <div class="success-icon">✓</div>
+    <p class="terima">Terima Kasih</p>
+    <p class="sub">Suara Anda telah tercatat</p>
+  </section>
+
+</main>
+
+<div id="modalKonfirmasi" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Apakah anda yakin untuk memilih</h2>
+      <p class="nama-calon" id="namaKandidat"></p>
+      <p class="confirm-text">sebagai Ketua RGM?</p>
+    </div>
+    <div class="modal-buttons">
+      <button id="btnTidak" class="btn-tidak">Kembali</button>
+      <button id="btnYa" class="btn-ya">Ya, saya yakin</button>
+    </div>
+  </div>
+</div>
+
+<div id="modalVisiMisi" class="vm-overlay" hidden>
+  <div class="vm-box" role="dialog" aria-modal="true" aria-labelledby="vmTitle">
+    <button type="button" class="vm-close" aria-label="Tutup">&times;</button>
+    <h2 id="vmTitle">Visi &amp; Misi Calon Ketua RGM</h2>
+    <div class="vm-grid" id="vmGrid"></div>
+  </div>
+</div>
+
+<script src="/js/guru.js"></script>
+<script src="/js/visimisi.js"></script>
+</body>
+</html>
