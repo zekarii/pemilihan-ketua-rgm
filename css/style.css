@@ -63,7 +63,7 @@ body {
 }
 
 .kertas {
-  background: var(--card);
+  background: rgba(15, 23, 48, 0.82);
   width: 100%;
   max-width: 900px;
   border-radius: 24px;
