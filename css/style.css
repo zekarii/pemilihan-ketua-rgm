@@ -637,3 +637,22 @@ select option { background: var(--card); color: var(--text); }
   .vm-box { padding: 28px 18px; }
   .vm-grid { grid-template-columns: 1fr; }
 }
+
+/* Fade out saat Visi Misi ditutup */
+.vm-overlay.menutup {
+  animation: fadeOut 0.25s ease-in forwards;
+}
+
+.vm-overlay.menutup .vm-box {
+  animation: modalOut 0.25s ease-in forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes modalOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(-20px) scale(0.97); }
+}
