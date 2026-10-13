@@ -119,57 +119,92 @@ function gambarKelas(per) {
   if (lain.length) box.appendChild(grupKelas('Lainnya', lain, per));
 }
  
+/* ---------- Satu baris kandidat (dipakai siswa dan guru) ---------- */
+function barisKandidat(c, foto, total) {
+  var pct = total ? Math.round(c.suara / total * 100) : 0;
+
+  var baris = document.createElement('div');
+  baris.className = 'baris';
+
+  var img = document.createElement('img');
+  if (foto) img.src = /^(\/|https?:)/.test(foto) ? foto : '/' + foto;
+  img.alt = '';
+
+  var info = document.createElement('div');
+  info.className = 'info';
+
+  var namaEl = document.createElement('div');
+  namaEl.className = 'info-nama';
+  namaEl.textContent = c.nama;
+
+  var pctEl = document.createElement('p');
+  pctEl.className = 'info-pct';
+  pctEl.textContent = pct + '%';
+
+  var bt = document.createElement('div');
+  bt.className = 'batang';
+  var bi = document.createElement('i');
+  bi.style.width = pct + '%';
+  bt.appendChild(bi);
+
+  info.appendChild(namaEl);
+  info.appendChild(pctEl);
+  info.appendChild(bt);
+
+  var angka = document.createElement('div');
+  angka.className = 'angka';
+  angka.textContent = c.suara;
+
+  baris.appendChild(img);
+  baris.appendChild(info);
+  baris.appendChild(angka);
+  return baris;
+}
+
+/* ---------- Suara guru (dibuat otomatis di bawah #hasil) ---------- */
+function wadahGuru() {
+  var w = el('guruHasil');
+  if (w) return w;
+  var hasil = el('hasil');
+  if (!hasil) return null;
+  w = document.createElement('div');
+  w.id = 'guruHasil';
+  hasil.parentNode.insertBefore(w, hasil.nextSibling);
+  return w;
+}
+
+function gambarGuru(g, foto) {
+  var w = wadahGuru();
+  if (!w || !g) return;
+  w.innerHTML = '';
+
+  var j = document.createElement('h3');
+  j.className = 'kelas-judul';
+  j.textContent = 'Suara Guru \u00b7 ' + g.total + ' suara';
+  w.appendChild(j);
+
+  g.counts.forEach(function (c) {
+    w.appendChild(barisKandidat(c, foto[c.id], g.total));
+  });
+}
+
 /* ---------- Hasil per kandidat + riwayat ---------- */
 function gambar(d) {
   el('total').textContent = d.total;
   gambarKelas(d.perKelas || {});
- 
+
   var h = el('hasil');
   h.innerHTML = '';
-  var nama = {};
- 
+  var nama = {}, foto = {};
+
   d.counts.forEach(function (c) {
     nama[c.id] = c.nama;
-    var pct = d.total ? Math.round(c.suara / d.total * 100) : 0;
- 
-    var baris = document.createElement('div');
-    baris.className = 'baris';
- 
-    var img = document.createElement('img');
-    img.src = /^(\/|https?:)/.test(c.foto) ? c.foto : '/' + c.foto;
-    img.alt = '';
- 
-    var info = document.createElement('div');
-    info.className = 'info';
- 
-    var namaEl = document.createElement('div');
-    namaEl.className = 'info-nama';
-    namaEl.textContent = c.nama;
- 
-    var pctEl = document.createElement('p');
-    pctEl.className = 'info-pct';
-    pctEl.textContent = pct + '%';
- 
-    var bt = document.createElement('div');
-    bt.className = 'batang';
-    var bi = document.createElement('i');
-    bi.style.width = pct + '%';
-    bt.appendChild(bi);
- 
-    info.appendChild(namaEl);
-    info.appendChild(pctEl);
-    info.appendChild(bt);
- 
-    var angka = document.createElement('div');
-    angka.className = 'angka';
-    angka.textContent = c.suara;
- 
-    baris.appendChild(img);
-    baris.appendChild(info);
-    baris.appendChild(angka);
-    h.appendChild(baris);
+    foto[c.id] = c.foto;
+    h.appendChild(barisKandidat(c, c.foto, d.total));
   });
- 
+
+  gambarGuru(d.guru, foto);
+
   var tb = el('log');
   tb.innerHTML = '';
   d.log.forEach(function (l) {
