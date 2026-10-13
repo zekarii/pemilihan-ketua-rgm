@@ -7,5 +7,11 @@
     "visi": "Menjadikan RGM sebagai poros sinergisitas yang responsif terhadap distrupsi zaman, guna mencetak pemimpin yang inovatif, berdaya saing tinggi dan berjiwa tafaqquh fiddin.",
     "misi": ["Menginisiasi program berbasis problem solving terhadap isu isu kontemporer di lingkungan sekolah.", "Mengedepankan prinsip musyawarah untuk mencapai mufakat yang berlandaskan objektivitas dan rasionalitas dalam pengambilan keputusan.", "Menjadikan aspirasi-aspirasi yang menjembatani komunikasi antara siswa dan pihak sekolah."]
   },
-  { "id": "2", "nama": "Rasya Patria Arinakusumah", "foto": "/img/4.png" }
+  { 
+    "id": "2", 
+    "nama": "Rasya Patria Arinakusumah", 
+    "foto": "/img/4.png",
+    "visi": "Menjadikan RGM sebagai ekosistem kepemimpinan santri yang mampu mengubah ide menjadi gerakan, kebiasaan menjadi budaya, dan kegiatan menjadi warisan yang terus berkembang, dengan menjadikan nilai kepesantrenan sebagai fondasi serta perkembangan santri sebagai tujuan.",
+    "misi": ["Membangun budaya evaluasi dan refleksi, agar setiap keberhasilan dapat dijadikan pembelajaran dan kegagalan dapat dijadikan bahan perbaikan kedepannya.", "Membentuk program berbasis kebutuhan nyata santri, melalui pengamatan dan evaluasi, bukan hanya mengulang kegiatan dari tahun sebelumnya.", "Mengubah aspirasi santri menjadi solusi yang terukur, bukan hanya sekedar menampung kritik dan saran, tetapi mencari akar permasalahan dan mengupayakan penyelesaiannya bersama sama.", "Menjadikan nilai-nilai kepesantrenan sebagai landasan dalam setiap proses kepemimpinan, pengambilan keputusan, dan pelaksanaan program, sehingga setiap langkah RGM tidak hanya menghasilkan kemajuan, tetapi juga membentuk akhlak dan tanggung jawab santri."]
+  }
 ]
