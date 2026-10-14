@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Total Pemilih - Pemilihan Ketua RGM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/musyum/admin/assets-admin/admin.css">
+<link rel="icon" type="image/ico" href="/musyum/admin/assets-admin/admin-favicon.ico">
+<style>
+  .kertas { max-width: 640px; text-align: center; }
+  .stat-number { font-size: clamp(4.5rem, 22vw, 9rem); }
+</style>
+</head>
+<body>
+<div class="bg-decoration"></div>
+<main class="kertas">
+  <h1>Total Pemilih</h1>
+  <p class="admin-subtitle">Pemilihan Ketua RGM &middot; santri dan asatidz</p>
+
+  <div class="stat-box">
+    <div class="stat-label">Total Suara</div>
+    <div class="stat-number" id="total">&hellip;</div>
+  </div>
+  <p class="hint" id="info"></p>
+</main>
+
+<script>
+var REFRESH_MS = 10000;
+
+function el(id) { return document.getElementById(id); }
+
+function muat() {
+  return fetch('/api/total', { cache: 'no-store' }).then(function (r) {
+    return r.text().then(function (t) {
+      var j = {};
+      try { j = JSON.parse(t); } catch (e) {}
+      if (!r.ok || typeof j.total !== 'number') {
+        throw new Error(j.error || ('Server tidak menjawab dengan benar (kode ' + r.status + ')'));
+      }
+      el('total').textContent = j.total;
+      el('info').textContent = 'Diperbarui otomatis pukul ' + new Date().toLocaleTimeString('id-ID');
+    });
+  }).catch(function (e) {
+    el('info').textContent = e.message;
+  });
+}
+
+muat();
+setInterval(muat, REFRESH_MS);
+</script>
+</body>
+</html>
